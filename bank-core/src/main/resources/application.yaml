@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: bank-core
+  datasource:
+    url: jdbc:mysql://localhost:3306/bank?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  redis:
+    host: localhost
+    port: 6379
+  grpc:
+    server:
+      port: 9091
+
+server:
+    port: 9090
+    servlet:
+        context-path: /api/v1
+    openapi:
+        enabled: true

@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.mellomaths.bank.core.stubs.pix";
+option java_outer_classname = "PixProto";
+option objc_class_prefix = "PIX";
+
+package com.mellomaths.bank.core;
+
+import "google/protobuf/timestamp.proto";
+
+enum PixKeyKind {
+    PIX_KEY_KIND_UNSPECIFIED = 0;
+    PIX_KEY_KIND_CPF = 1;
+    PIX_KEY_KIND_CNPJ = 2;
+    PIX_KEY_KIND_EMAIL = 3;
+    PIX_KEY_KIND_PHONE = 4;
+    PIX_KEY_KIND_RANDOM = 5;
+}
+
+message RegisterPixKeyRequest {
+    PixKeyKind kind = 1;
+    optional string key = 2;
+    string account_id = 3;
+}
+
+message RegisterPixKeyResponse {
+    string id = 1;
+    string status = 2;
+    string error = 3;
+}
+
+message PixKey {
+    string id = 1;
+    PixKeyKind kind = 2;
+    string key = 3;
+    Account account = 4;
+    string status = 5;
+}
+
+service PixService {
+    rpc RegisterPixKey (RegisterPixKeyRequest) returns (RegisterPixKeyResponse);
+    rpc FindPixKey (PixKey) returns (PixKey);
+}
